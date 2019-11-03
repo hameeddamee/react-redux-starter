@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import LoginFormContainer from "../../containers/LoginFormContainer";
+import SignupFormContainer from "../../containers/SignupFormContainer";
 
 const LoginPage = ({ history, isAuthenticated }) => {
   useEffect(() => {
@@ -41,7 +41,7 @@ const LoginPage = ({ history, isAuthenticated }) => {
         </div>
         <div className="col-md-6">
           <div className="ibox-content">
-            <LoginFormContainer />
+            <SignupFormContainer history={history} />
           </div>
         </div>
       </div>

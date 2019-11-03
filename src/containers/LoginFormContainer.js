@@ -1,11 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { reduxForm, formValueSelector, SubmissionError } from "redux-form";
+import { reduxForm } from "redux-form";
 
 import LoginFormComponent from "../components/Login/LoginFormComponent";
 import { loginUser } from "../redux/actions/authActions";
-
-let selector = formValueSelector("LoginForm");
 
 let mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated

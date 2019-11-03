@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "./LoginFormComponent.css";
 
@@ -24,16 +25,16 @@ const LoginFormComponent = props => {
         Login
       </button>
 
-      <a href="#">
+      <Link to="/forgot-password">
         <small>Forgot password?</small>
-      </a>
+      </Link>
 
       <p className="text-muted text-center">
         <small>Do not have an account?</small>
       </p>
-      <a className="btn btn-sm btn-white btn-block" href="register.html">
+      <Link className="btn btn-sm btn-white btn-block" to="/signup">
         Create an account
-      </a>
+      </Link>
     </form>
   );
 };

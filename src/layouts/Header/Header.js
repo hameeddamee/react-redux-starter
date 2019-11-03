@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -8,9 +9,9 @@ const Header = () => {
         role="navigation"
       >
         <div className="container">
-          <a className="navbar-brand" href="index.html">
+          <Link className="navbar-brand" to="/">
             LOGISTICO
-          </a>
+          </Link>
           <div className="navbar-header page-scroll">
             <button
               className="navbar-toggler"
@@ -27,14 +28,14 @@ const Header = () => {
           >
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <a className="nav-link page-scroll" href="#page-top">
+                <Link className="nav-link page-scroll" to="/login">
                   Login
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="nav-link page-scroll" href="#features">
+                <Link className="nav-link page-scroll" to="/signup">
                   Signup
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

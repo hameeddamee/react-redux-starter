@@ -5,7 +5,7 @@ import setAuthToken from "../../utils/setAuthToken";
 import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 
 // Register User
-export const registerUser = (userData, history) => dispatch => {
+export const registerUser = (history, userData) => dispatch => {
   axios
     .post(
       "https://sendbox-challenge.herokuapp.com/auth/local/register",
@@ -30,12 +30,12 @@ export const loginUser = userData => dispatch => {
       setAuthToken(jwt);
       dispatch(setCurrentUser(user));
     })
-    .catch(err => {
+    .catch(err =>
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
-      });
-    });
+      })
+    );
 };
 
 // Set logged in user

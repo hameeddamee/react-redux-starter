@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import "./App.css";
 
@@ -10,6 +10,7 @@ import Header from "./layouts/Header/Header";
 import Footer from "./layouts/Footer/Footer";
 import LoginPage from "./pages/Login/LoginPage";
 import Profile from "./pages/Profile/Profile";
+import SignupPage from "./pages/Signup/SignupPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route exact path="/" component={LoginPage} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/signup" component={SignupPage} />
             <Footer />
           </div>
         </div>
