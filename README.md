@@ -1,4 +1,4 @@
-A start folder for react-redux project. This project is was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It uses Redux, React Router, and Redux Form.
+A starter boilerplate for react projects comprising redux, redux-think, redux-form, react-router-dom. This project is was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It uses Redux, React Router, and Redux Form.
 
 ## Available Scripts
 
