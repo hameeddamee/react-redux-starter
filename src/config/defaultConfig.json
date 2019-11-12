@@ -1,0 +1,6 @@
+{
+  "Routes": {
+    "dashboard": "/dashboard",
+    "profile": "/profile"
+  }
+}
