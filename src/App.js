@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -6,7 +6,9 @@ import "./App.css";
 
 import store from "./redux/store";
 import redirectIfAuthorized from "./hocs/redirectIfAuthorized";
+import loadOnlyIfAuthorized from "./hocs/loadOnlyIfAuthorized";
 import config from "./config";
+import { checkAuthState } from "./redux/actions/authActions";
 
 import Header from "./layouts/Header/Header";
 import Footer from "./layouts/Footer/Footer";
@@ -15,7 +17,11 @@ import LoginPage from "./pages/Login/LoginPage";
 import ProfilePage from "./pages/Profile/ProfilePage";
 import SignupPage from "./pages/Signup/SignupPage";
 
-function App() {
+export const App = () => {
+  useEffect(() => {
+    store.dispatch(checkAuthState());
+  }, []);
+
   return (
     <Provider store={store}>
       <Router>
@@ -51,10 +57,7 @@ function App() {
             <Route
               exact
               path="/profile"
-              component={redirectIfAuthorized(
-                ProfilePage,
-                config.Routes.profile
-              )}
+              component={loadOnlyIfAuthorized(ProfilePage)}
             />
             <Footer />
           </div>
@@ -62,6 +65,6 @@ function App() {
       </Router>
     </Provider>
   );
-}
+};
 
 export default App;

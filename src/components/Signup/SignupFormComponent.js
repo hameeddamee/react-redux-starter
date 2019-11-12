@@ -6,10 +6,11 @@ import "./SignupFormComponent.css";
 import Input from "../common/formElements/Input";
 
 const SignupFormComponent = props => {
-  const { handleSubmit, registerUser, history } = props;
+  const { handleSubmit, registerUser } = props;
   return (
     <form
-      onSubmit={handleSubmit(registerUser.bind(this, history))}
+      onSubmit={handleSubmit(registerUser)}
+      // onSubmit={handleSubmit(registerUser.bind(this, history))}
       className="m-t"
     >
       <Input

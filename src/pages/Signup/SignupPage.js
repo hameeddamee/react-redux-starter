@@ -1,15 +1,8 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import React from "react";
 
 import SignupFormContainer from "../../containers/SignupFormContainer";
 
-const LoginPage = ({ history, isAuthenticated }) => {
-  useEffect(() => {
-    if (isAuthenticated) {
-      history.push("/profile");
-    }
-  });
-
+const LoginPage = () => {
   return (
     <div className="loginColumns animated fadeInDown">
       <div className="row">
@@ -41,7 +34,7 @@ const LoginPage = ({ history, isAuthenticated }) => {
         </div>
         <div className="col-md-6">
           <div className="ibox-content">
-            <SignupFormContainer history={history} />
+            <SignupFormContainer />
           </div>
         </div>
       </div>
@@ -49,8 +42,4 @@ const LoginPage = ({ history, isAuthenticated }) => {
   );
 };
 
-let mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
-});
-
-export default connect(mapStateToProps)(LoginPage);
+export default LoginPage;

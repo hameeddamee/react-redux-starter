@@ -1,4 +1,7 @@
 {
+  "Urls": {
+    "base": "https://sendbox-challenge.herokuapp.com"
+  },
   "Routes": {
     "dashboard": "/dashboard",
     "profile": "/profile"
