@@ -24,11 +24,10 @@ export const checkAuthState = () => dispatch => {
 };
 
 // Register User
-export const registerUser = userData => dispatch => {
+export const registerUser = (userData, dispatch) => {
   axios
     .post(`${config.Urls.base}/auth/local/register`, userData)
     .then(res => {
-      console.log("res", res);
       const { jwt, user } = res.data;
       localStorage.setItem("jwtToken", jwt);
       localStorage.setItem("user", JSON.stringify(user));

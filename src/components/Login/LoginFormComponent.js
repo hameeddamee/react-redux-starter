@@ -6,7 +6,15 @@ import "./LoginFormComponent.css";
 import Input from "../common/formElements/Input";
 
 const LoginFormComponent = props => {
-  const { handleSubmit, loginUser } = props;
+  const {
+    handleSubmit,
+    loginUser
+    // pristine,
+    // submitting,
+    // invalid,
+    // passwordValue,
+    // errorMsg
+  } = props;
   return (
     <form onSubmit={handleSubmit(loginUser)} className="m-t">
       <Input

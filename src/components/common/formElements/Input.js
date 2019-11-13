@@ -1,8 +1,14 @@
 import React from "react";
 import { Field } from "redux-form";
 
-const ConfigInput = ({ input, type, placeholder, error, className }) => {
-  // console.log("error:", error);
+const ConfigInput = ({
+  input,
+  type,
+  placeholder,
+  className,
+  info,
+  meta: { touched, error, warning }
+}) => {
   return (
     <div className="form-group">
       <input
@@ -12,13 +18,16 @@ const ConfigInput = ({ input, type, placeholder, error, className }) => {
         placeholder={placeholder}
         required=""
       />
-      {error && <div className="invalid-feedback">{error}</div>}
+      {info && <small className="text-warning">{info}</small>}
+      {touched &&
+        ((error && <small className="text-danger">{error}</small>) ||
+          (warning && <small>{warning}</small>))}
     </div>
   );
 };
 
 const Input = props => {
-  return <Field name={props.name} component={ConfigInput} props={props} />;
+  return <Field name={props.name} component={ConfigInput} {...props} />;
 };
 
 export default Input;

@@ -1,4 +1,11 @@
 {
+  "global": {
+    "locale": "en-US",
+    "dateFormat": "D/M/YYYY",
+    "timeFormat": "HH:mm:ss",
+    "dateTimeFormat": "D-M-YYYY h:mma",
+    "phoneDefaultCountry": "NG"
+  },
   "Urls": {
     "base": "https://sendbox-challenge.herokuapp.com"
   },
