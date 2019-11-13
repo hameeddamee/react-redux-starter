@@ -98,6 +98,7 @@ export const maxLength = max => {
 };
 
 export const isValidPhone = value => {
+  console.log("phone-value", value);
   return isValidNumber(value, metadata)
     ? undefined
     : "Must be a valid phone number";

@@ -6,7 +6,8 @@ import {
   email,
   matchingPassword,
   maxLength,
-  validatePassword
+  validatePassword,
+  isValidPhone
 } from "../../helpers/formValidations.js";
 import getPasswordStrength from "../../helpers/getPasswordStrength";
 
@@ -14,6 +15,9 @@ import Input from "../common/formElements/Input";
 import Button from "../common/Button";
 
 import "./SignupFormComponent.css";
+import PhoneTextInput from "../common/formElements/PhoneInput.js";
+
+// const validatePhoneNumMaxLength = maxLength(11);
 
 const SignupFormComponent = props => {
   const {
@@ -26,9 +30,6 @@ const SignupFormComponent = props => {
     errorMsg
   } = props;
 
-  console.log("pristine", pristine);
-  console.log("submitting", submitting);
-  console.log("invalid", invalid);
   return (
     <form onSubmit={handleSubmit(registerUser)} className="m-t">
       {errorMsg && <small className="text-danger">{errorMsg}</small>}
@@ -66,8 +67,9 @@ const SignupFormComponent = props => {
         type="text"
         className="form-control"
         placeholder="Phone"
-        validate={[maxLength]}
+        // validate={[isValidPhone]}
       />
+      <PhoneTextInput country="NG" name="telephone" className="form-control" />
       <Button
         type="submit"
         className="btn btn-primary block full-width m-b"

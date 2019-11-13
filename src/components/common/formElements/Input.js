@@ -18,10 +18,10 @@ const ConfigInput = ({
         placeholder={placeholder}
         required=""
       />
-      {info && <small className="text-warning">{info}</small>}
+      {info && <small className="text-info">{info}</small>}
       {touched &&
         ((error && <small className="text-danger">{error}</small>) ||
-          (warning && <small>{warning}</small>))}
+          (warning && <small className="text-warning">{warning}</small>))}
     </div>
   );
 };
