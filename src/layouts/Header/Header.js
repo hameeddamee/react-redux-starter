@@ -1,7 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-const Header = () => {
+import { logoutUser } from "../../redux/actions/authActions";
+
+import AuthHeaderLink from "./AuthHeaderLinks/AuthHeaderLink";
+import GuestHeaderLink from "./GuestHeaderLinks/GuestHeaderLink";
+
+const Header = ({ isAuthenticated, logoutUser }) => {
+  const links = isAuthenticated ? (
+    <AuthHeaderLink onClickHandler={logoutUser} />
+  ) : (
+    <GuestHeaderLink />
+  );
+
   return (
     <div className="navbar-wrapper">
       <nav
@@ -12,6 +24,7 @@ const Header = () => {
           <Link className="navbar-brand" to="/">
             LOGISTICO
           </Link>
+
           <div className="navbar-header page-scroll">
             <button
               className="navbar-toggler"
@@ -26,18 +39,7 @@ const Header = () => {
             className="collapse navbar-collapse justify-content-end"
             id="navbar"
           >
-            <ul className="nav navbar-nav navbar-right">
-              <li>
-                <Link className="nav-link page-scroll" to="/login">
-                  Login
-                </Link>
-              </li>
-              <li>
-                <Link className="nav-link page-scroll" to="/signup">
-                  Signup
-                </Link>
-              </li>
-            </ul>
+            <ul className="nav navbar-nav navbar-right">{links}</ul>
           </div>
         </div>
       </nav>
@@ -45,4 +47,12 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+const mapDispatchToProps = {
+  logoutUser
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -2,7 +2,12 @@ import axios from "axios";
 import setAuthToken from "../../helpers/setAuthToken";
 import jwt_decode from "jwt-decode";
 
-import { GET_ERRORS, SET_CURRENT_USER } from "./types";
+import {
+  AUTH_ERRORS,
+  SET_CURRENT_USER,
+  CLEAR_ERRORS,
+  IS_REGISTERING
+} from "./types";
 import config from "../../config";
 
 // check token existence in localstorage and act accordingly
@@ -24,7 +29,8 @@ export const checkAuthState = () => dispatch => {
 };
 
 // Register User
-export const registerUser = (userData, dispatch) => {
+export const registerUser = userData => dispatch => {
+  dispatch(setRegStatus());
   axios
     .post(`${config.Urls.base}/auth/local/register`, userData)
     .then(res => {
@@ -32,25 +38,22 @@ export const registerUser = (userData, dispatch) => {
       localStorage.setItem("jwtToken", jwt);
       localStorage.setItem("user", JSON.stringify(user));
 
-      // Set token to Auth header
       setAuthToken(jwt);
 
       // const decoded = jwt_decode(jwt);
+
       dispatch(setCurrentUser(user));
     })
     .catch(err => {
-      console.log(
-        "err.response.data.message[0].messages[0].message",
-        err.response.data.message[0].messages[0].message
-      );
       dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
+        type: AUTH_ERRORS,
+        payload: err.response.data.message[0].messages[0].message
       });
     });
 };
 
 export const loginUser = userData => dispatch => {
+  dispatch(setRegStatus());
   axios
     .post(`${config.Urls.base}/auth/local`, userData)
     .then(res => {
@@ -62,13 +65,9 @@ export const loginUser = userData => dispatch => {
       dispatch(setCurrentUser(user));
     })
     .catch(err => {
-      console.log(
-        "err.response.data.message[0].messages[0].message",
-        err.response.data.message[0].messages[0].message
-      );
       dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
+        type: AUTH_ERRORS,
+        payload: err.response.data.message[0].messages[0].message
       });
     });
 };
@@ -83,6 +82,7 @@ export const setCurrentUser = user => {
 
 // Log user out
 export const logoutUser = () => dispatch => {
+  console.log("got here");
   // Remove token from localStorage
   localStorage.removeItem("jwtToken");
   localStorage.removeItem("user");
@@ -90,4 +90,15 @@ export const logoutUser = () => dispatch => {
   setAuthToken(false);
   // Set current user to {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
+};
+
+export const clearSignupError = () => {
+  return {
+    type: CLEAR_ERRORS
+  };
+};
+export const setRegStatus = () => {
+  return {
+    type: IS_REGISTERING
+  };
 };

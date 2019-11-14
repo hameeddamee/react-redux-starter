@@ -5,40 +5,46 @@ import {
   required,
   email,
   matchingPassword,
-  maxLength,
-  validatePassword,
-  isValidPhone
+  validatePassword
 } from "../../helpers/formValidations.js";
 import getPasswordStrength from "../../helpers/getPasswordStrength";
 
-import Input from "../common/formElements/Input";
+import Input from "../common/formElements/Input/Input";
 import Button from "../common/Button";
+import PhoneTextInput from "../common/formElements/PhoneInput/PhoneTextInput";
 
 import "./SignupFormComponent.css";
-import PhoneTextInput from "../common/formElements/PhoneInput.js";
-
-// const validatePhoneNumMaxLength = maxLength(11);
 
 const SignupFormComponent = props => {
   const {
     handleSubmit,
     pristine,
-    submitting,
     invalid,
     registerUser,
     passwordValue,
-    errorMsg
+    errorMsg,
+    clearSignupError,
+    isRegistering
   } = props;
+
+  const handleChange = e => {
+    if (errorMsg) clearSignupError();
+  };
 
   return (
     <form onSubmit={handleSubmit(registerUser)} className="m-t">
-      {errorMsg && <small className="text-danger">{errorMsg}</small>}
+      {errorMsg && (
+        <div className="text-danger">
+          <strong>{errorMsg}</strong>
+        </div>
+      )}
       <Input
         name="username"
         type="text"
         className="form-control"
         placeholder="Username"
         validate={[required]}
+        onChange={handleChange}
       />
       <Input
         name="email"
@@ -46,6 +52,7 @@ const SignupFormComponent = props => {
         className="form-control"
         placeholder="Email"
         validate={[required, email]}
+        onChange={handleChange}
       />
       <Input
         name="password"
@@ -54,6 +61,7 @@ const SignupFormComponent = props => {
         placeholder="Password"
         validate={[required, validatePassword]}
         info={passwordValue && getPasswordStrength(passwordValue)}
+        onChange={handleChange}
       />
       <Input
         name="matchingPassword"
@@ -61,21 +69,21 @@ const SignupFormComponent = props => {
         className="form-control"
         placeholder="Confirm Password"
         validate={[required, matchingPassword]}
+        onChange={handleChange}
       />
-      <Input
-        name="phone"
-        type="text"
+      <PhoneTextInput
+        country="NG"
+        name="telephone"
         className="form-control"
-        placeholder="Phone"
-        // validate={[isValidPhone]}
+        asyncValidating={true}
+        placeholder="Phone Number"
       />
-      <PhoneTextInput country="NG" name="telephone" className="form-control" />
       <Button
         type="submit"
         className="btn btn-primary block full-width m-b"
-        disabled={pristine || submitting || invalid}
+        disabled={pristine || isRegistering || invalid}
       >
-        {submitting ? "Processing..." : "Sign Up"}
+        {isRegistering ? "Processing..." : "Sign Up"}
       </Button>
 
       <p className="text-muted text-center">

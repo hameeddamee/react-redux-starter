@@ -1,37 +1,59 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./LoginFormComponent.css";
+import { required, email } from "../../helpers/formValidations.js";
 
-import Input from "../common/formElements/Input";
+import Input from "../common/formElements/Input/Input";
+import Button from "../common/Button";
+
+import "./LoginFormComponent.css";
 
 const LoginFormComponent = props => {
   const {
     handleSubmit,
-    loginUser
-    // pristine,
-    // submitting,
-    // invalid,
-    // passwordValue,
-    // errorMsg
+    loginUser,
+    pristine,
+    isRegistering,
+    invalid,
+    errorMsg,
+    clearSignupError
   } = props;
+
+  const handleChange = e => {
+    if (errorMsg) clearSignupError();
+  };
+
   return (
     <form onSubmit={handleSubmit(loginUser)} className="m-t">
+      {errorMsg && (
+        <div className="text-danger">
+          <strong>{errorMsg}</strong>
+        </div>
+      )}
       <Input
         name="identifier"
         type="email"
         className="form-control"
         placeholder="Username"
+        validate={[required, email]}
+        onChange={handleChange}
       />
       <Input
         name="password"
         type="password"
         className="form-control"
         placeholder="Password"
+        validate={[required]}
+        onChange={handleChange}
       />
-      <button type="submit" className="btn btn-primary block full-width m-b">
-        Login
-      </button>
+
+      <Button
+        type="submit"
+        className="btn btn-primary block full-width m-b"
+        disabled={pristine || isRegistering || invalid}
+      >
+        {isRegistering ? "Processing..." : "Login"}
+      </Button>
 
       <Link to="/forgot-password">
         <small>Forgot password?</small>

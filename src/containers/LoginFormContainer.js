@@ -1,24 +1,28 @@
 import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
 
+import { loginUser, clearSignupError } from "../redux/actions/authActions";
+
 import LoginFormComponent from "../components/Login/LoginFormComponent";
-import { loginUser } from "../redux/actions/authActions";
+
+let LoginFormContainer = reduxForm({
+  form: "LoginForm"
+})(LoginFormComponent);
 
 let mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  errorMsg: state.auth.errorMsg,
+  isRegistering: state.auth.isRegistering
 });
 
 let mapDispatchToProps = {
-  loginUser
+  loginUser,
+  clearSignupError
 };
 
-let LoginFormContainer = connect(
+LoginFormContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginFormComponent);
-
-LoginFormContainer = reduxForm({
-  form: "LoginForm"
-})(LoginFormContainer);
+)(LoginFormContainer);
 
 export default LoginFormContainer;

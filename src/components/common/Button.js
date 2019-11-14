@@ -1,9 +1,10 @@
 import React, { Fragment } from "react";
 
-const Button = ({ type, children, className, disabled }) => {
+const Button = props => {
+  const { type, children, className, disabled } = props;
   return (
     <Fragment>
-      <button type={type} className={className} disabled={disabled}>
+      <button type={type} className={className} disabled={disabled} {...props}>
         {children}
       </button>
     </Fragment>
